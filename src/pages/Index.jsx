@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Container, Flex, Heading, Link, Stack, Text, VStack, Button, Input, Textarea, Tag, TagLabel, TagCloseButton } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Link, Stack, Text, VStack, Button, Input, Textarea, Tag, TagLabel, TagCloseButton, useColorMode } from "@chakra-ui/react";
 import { FaTwitter, FaFacebook, FaInstagram } from "react-icons/fa";
 
 const Index = () => {
@@ -38,18 +38,20 @@ const Index = () => {
     setShowForm(false);
   };
 
+  const { colorMode } = useColorMode();
+
   return (
     <Box>
       {/* Navigation Bar */}
-      <Box as="nav" bg="gray.800" color="white" py={4}>
+      <Box as="nav" bg={colorMode === "light" ? "gray.800" : "gray.200"} color={colorMode === "light" ? "white" : "black"} py={4}>
         <Container maxW="container.lg">
           <Flex justify="space-between" align="center">
             <Heading as="h1" size="lg">My Blog</Heading>
             <Stack direction="row" spacing={4}>
-              <Link href="#" _hover={{ textDecoration: "none", color: "gray.400" }}>Home</Link>
-              <Link href="#" _hover={{ textDecoration: "none", color: "gray.400" }}>About</Link>
-              <Link href="#" _hover={{ textDecoration: "none", color: "gray.400" }}>Blog</Link>
-              <Link href="#" _hover={{ textDecoration: "none", color: "gray.400" }}>Contact</Link>
+              <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.400" : "gray.600" }}>Home</Link>
+              <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.400" : "gray.600" }}>About</Link>
+              <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.400" : "gray.600" }}>Blog</Link>
+              <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.400" : "gray.600" }}>Contact</Link>
               <Button colorScheme="teal" onClick={() => setShowForm(!showForm)}>New Post</Button>
             </Stack>
           </Flex>
@@ -103,7 +105,7 @@ const Index = () => {
             )}
             <VStack spacing={8} align="stretch">
               {posts.map((post, index) => (
-                <Box key={index} p={5} shadow="md" borderWidth="1px">
+                <Box key={index} p={5} shadow="md" borderWidth="1px" bg={colorMode === "light" ? "white" : "gray.700"}>
                   <Heading fontSize="xl">{post.title}</Heading>
                   <Text mt={4}>{post.content}</Text>
                   <Flex wrap="wrap" mt={2}>
@@ -120,20 +122,20 @@ const Index = () => {
 
           {/* Sidebar */}
           <Box flex="1" ml={{ md: 8 }} mt={{ base: 8, md: 0 }}>
-            <Box p={5} shadow="md" borderWidth="1px" mb={8}>
+            <Box p={5} shadow="md" borderWidth="1px" mb={8} bg={colorMode === "light" ? "white" : "gray.700"}>
               <Heading fontSize="lg" mb={4}>Recent Posts</Heading>
               <VStack align="start">
                 {posts.slice(-3).map((post, index) => (
-                  <Link key={index} href="#" _hover={{ textDecoration: "none", color: "gray.600" }}>{post.title}</Link>
+                  <Link key={index} href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.600" : "gray.400" }}>{post.title}</Link>
                 ))}
               </VStack>
             </Box>
-            <Box p={5} shadow="md" borderWidth="1px">
+            <Box p={5} shadow="md" borderWidth="1px" bg={colorMode === "light" ? "white" : "gray.700"}>
               <Heading fontSize="lg" mb={4}>Categories</Heading>
               <VStack align="start">
-                <Link href="#" _hover={{ textDecoration: "none", color: "gray.600" }}>Category 1</Link>
-                <Link href="#" _hover={{ textDecoration: "none", color: "gray.600" }}>Category 2</Link>
-                <Link href="#" _hover={{ textDecoration: "none", color: "gray.600" }}>Category 3</Link>
+                <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.600" : "gray.400" }}>Category 1</Link>
+                <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.600" : "gray.400" }}>Category 2</Link>
+                <Link href="#" _hover={{ textDecoration: "none", color: colorMode === "light" ? "gray.600" : "gray.400" }}>Category 3</Link>
               </VStack>
             </Box>
           </Box>
@@ -141,14 +143,14 @@ const Index = () => {
       </Container>
 
       {/* Footer */}
-      <Box as="footer" bg="gray.800" color="white" py={4} mt={8}>
+      <Box as="footer" bg={colorMode === "light" ? "gray.800" : "gray.200"} color={colorMode === "light" ? "white" : "black"} py={4} mt={8}>
         <Container maxW="container.lg">
           <Flex justify="space-between" align="center">
             <Text>&copy; {new Date().getFullYear()} My Blog. All rights reserved.</Text>
             <Stack direction="row" spacing={4}>
-              <Link href="#" _hover={{ color: "gray.400" }}><FaTwitter /></Link>
-              <Link href="#" _hover={{ color: "gray.400" }}><FaFacebook /></Link>
-              <Link href="#" _hover={{ color: "gray.400" }}><FaInstagram /></Link>
+              <Link href="#" _hover={{ color: colorMode === "light" ? "gray.400" : "gray.600" }}><FaTwitter /></Link>
+              <Link href="#" _hover={{ color: colorMode === "light" ? "gray.400" : "gray.600" }}><FaFacebook /></Link>
+              <Link href="#" _hover={{ color: colorMode === "light" ? "gray.400" : "gray.600" }}><FaInstagram /></Link>
             </Stack>
           </Flex>
         </Container>
